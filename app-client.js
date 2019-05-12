@@ -9,6 +9,7 @@ import S from 'shorti'
 import _ from 'lodash'
 import { Input } from 'react-bootstrap'
 
+
 class App extends Component {
 
   constructor() {
@@ -26,8 +27,8 @@ class App extends Component {
       this.refs.author.refs.input.focus()
     }, 100)
     const socket = io()
-    Cosmic.getObjects(config, (err, res) => {
-      const messages = res.objects.type.messages
+    Cosmic.getObjects(config, () => {
+      const messages = []
       if (messages) {
         messages.reverse()
         this.setState({
@@ -111,6 +112,7 @@ class App extends Component {
   }
 
   handleSubmit(e) {
+    console.log()
     e.preventDefault()
     const data = this.state.data
     if (data.author)
@@ -160,17 +162,62 @@ class App extends Component {
       overflowY: 'scroll'
     }
     return (
-      <div>
-        <div style={ S('pl-15') }>
-          <h2>React Chat App</h2>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4 offset-md-5">
+          <h1>MindHearth</h1>
+          </div>
+          </div>
+          <div className="mdc-card mdc-card--outlined">
           <div ref="messages_scroll_area" style={ scroll_area_style }>
             <ul style={ S('p-0') }>{ messages_list }</ul>
+        </div>
+        </div>
+        <div>
+          <div className="row">
+            <div className="offset-xsm-1 col-sm">
+            <form onSubmit={ this.handleSubmit.bind(this) }>
+            { form_input }
+            </form>
+            </div>
           </div>
         </div>
-        <div style={ S('absolute b-0 w-100p pl-15 pr-15') }>
-          <form onSubmit={ this.handleSubmit.bind(this) }>
-            { form_input }
-          </form>
+        <div className="row">
+          <div className="col-sm">
+            <div className="card">
+                <div className="card-body">
+                  <img src="https://necessarydisorder.files.wordpress.com/2017/11/tuto4.gif?w=982" className="card-img-top" alt="..."/>
+                </div>
+            </div>
+          </div>
+          <div className="col-sm">
+            <div className="card">
+              <div className="card-body">
+                <img src="https://necessarydisorder.files.wordpress.com/2017/11/tuto1.gif?w=982" className="card-img-top" alt="..."/>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm">
+            <div className="card">
+              <div className="card-body">
+                <img src="https://necessarydisorder.files.wordpress.com/2017/11/tuto4.gif?w=982" className="card-img-top" alt="..."/>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm">
+            <div className="card">
+              <div className="card-body">
+                <img src="https://necessarydisorder.files.wordpress.com/2017/11/tuto1.gif?w=982" className="card-img-top" alt="..."/>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm">
+            <div className="card">
+              <div className="card-body">
+                <img src="https://necessarydisorder.files.wordpress.com/2017/11/tuto4.gif?w=982" className="card-img-top" alt="..."/>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
